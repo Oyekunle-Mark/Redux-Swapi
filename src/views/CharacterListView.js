@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { func, arrayOf, object, bool } from 'prop-types';
+import { arrayOf, object, bool } from 'prop-types';
 import Loader from 'react-loader-spinner';
 import styled from 'styled-components';
 
@@ -39,56 +39,52 @@ const StyledCharacterList = styled.div`
   background: rgb(187, 161, 14);
 `;
 
-class CharacterListView extends React.Component {
-  componentDidMount() {
-    const { stillFetching, fetchPeople } = this.props;
+const CharacterListView = props => {
+  useEffect(() => {
+    const { stillFetching, fetchPeople } = props;
     stillFetching();
     fetchPeople();
-  }
+  }, []);
 
-  render() {
-    const { characters, fetching, error } = this.props;
+  const { characters, fetching, error } = props;
 
-    return (
-      <div>
-        <StyledHeader>
-          <img
-            src="https://image.flaticon.com/icons/png/512/236/236606.png"
-            alt="darth"
-          />
-          <h1>Star Wars</h1>
-          <img
-            src="https://image.flaticon.com/icons/png/512/236/236606.png"
-            alt="darth"
-          />
-        </StyledHeader>
+  return (
+    <div>
+      <StyledHeader>
+        <img
+          src="https://image.flaticon.com/icons/png/512/236/236606.png"
+          alt="darth"
+        />
+        <h1>Star Wars</h1>
+        <img
+          src="https://image.flaticon.com/icons/png/512/236/236606.png"
+          alt="darth"
+        />
+      </StyledHeader>
 
-        {fetching && (
-          <StyledCharacterList>
-            <Loader type="TailSpin" color="black" height={80} width={80} />
-          </StyledCharacterList>
-        )}
-
-        {error && (
-          <StyledCharacterList>
-            <h3>Error fetching data.</h3>
-          </StyledCharacterList>
-        )}
-
+      {fetching && (
         <StyledCharacterList>
-          <CharacterList characters={characters} />
+          <Loader type="TailSpin" color="black" height={80} width={80} />
         </StyledCharacterList>
-      </div>
-    );
-  }
-}
+      )}
+
+      {error && (
+        <StyledCharacterList>
+          <h3>Error fetching data.</h3>
+        </StyledCharacterList>
+      )}
+
+      <StyledCharacterList>
+        <CharacterList characters={characters} />
+      </StyledCharacterList>
+    </div>
+  );
+};
 
 CharacterListView.propTypes = {
   characters: arrayOf(object).isRequired,
   fetching: bool.isRequired,
   error: bool,
-  stillFetching: func.isRequired,
-  fetchPeople: func.isRequired,
 };
 
 const mapStateToProps = ({ charsReducer }) => ({
