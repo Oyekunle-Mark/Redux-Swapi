@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { func, arrayOf, object, bool } from 'prop-types';
+import Loader from 'react-loader-spinner';
 
 import CharacterList from '../components/CharacterList';
 import { fetchPeople, stillFetching } from '../actions/index';
@@ -15,7 +16,13 @@ class CharacterListView extends React.Component {
   render() {
     const { characters, fetching, error } = this.props;
 
-    if (fetching) return <h1>Getting characters...</h1>;
+    if (fetching) {
+      return (
+        <h1>
+          <Loader type="TailSpin" color="red" height={80} width={80} />
+        </h1>
+      );
+    }
     if (error) return <h1>Error fetching data.</h1>;
 
     return (
