@@ -15,9 +15,11 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module',
   },
-  plugins: [
-    'react',
-  ],
+  plugins: ['react'],
   rules: {
+    'react/jsx-filename-extension': 0,
+    'no-underscore-dangle': 0,
+    'implicit-arrow-linebreak': 0,
+    'import/prefer-default-export': 0,
   },
 };
