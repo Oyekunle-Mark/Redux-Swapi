@@ -25,5 +25,6 @@ module.exports = {
     'react/forbid-prop-types': 0,
     'no-shadow': 0,
     'object-curly-newline': 0,
+    'react/require-default-props': 0,
   },
 };

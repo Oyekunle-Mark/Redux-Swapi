@@ -13,11 +13,10 @@ class CharacterListView extends React.Component {
   }
 
   render() {
-    const { characters, fetching } = this.props;
+    const { characters, fetching, error } = this.props;
 
-    if (fetching) {
-      return <h1>Getting characters...</h1>;
-    }
+    if (fetching) return <h1>Getting characters...</h1>;
+    if (error) return <h1>Error fetching data.</h1>;
 
     return (
       <div>
@@ -30,6 +29,7 @@ class CharacterListView extends React.Component {
 CharacterListView.propTypes = {
   characters: arrayOf(object).isRequired,
   fetching: bool.isRequired,
+  error: bool,
   stillFetching: func.isRequired,
   fetchPeople: func.isRequired,
 };
@@ -37,6 +37,7 @@ CharacterListView.propTypes = {
 const mapStateToProps = ({ charsReducer }) => ({
   characters: charsReducer.characters,
   fetching: charsReducer.fetching,
+  error: charsReducer.error,
 });
 
 export default connect(

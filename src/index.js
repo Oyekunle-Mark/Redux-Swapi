@@ -11,7 +11,6 @@ import App from './App';
 
 const store = createStore(
   rootReducer,
-  {},
   compose(
     applyMiddleware(thunk, logger),
     window.__REDUX_DEVTOOLS_EXTENSION__
