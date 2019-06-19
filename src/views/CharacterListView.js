@@ -35,7 +35,7 @@ const StyledCharacterList = styled.div`
   align-items: center;
 
   min-width: 100%;
-  /* min-height: 100%; */
+  min-height: 100vh;
   background: rgb(187, 161, 14);
 `;
 
