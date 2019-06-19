@@ -6,7 +6,7 @@ export const actionTypes = {
   FAILURE: 'FAILURE',
 };
 
-export const success = () => ({
+export const stillFetching = () => ({
   type: actionTypes.FETCHING,
 });
 
@@ -23,6 +23,6 @@ export const failure = payload => ({
 export const fetchPeople = () => dispatch => {
   axios
     .get('https://swapi.co/api/people')
-    .then(res => dispatch(addPeople(res.data)))
+    .then(res => dispatch(addPeople(res.data.results)))
     .catch(err => dispatch(failure(err.message)));
 };

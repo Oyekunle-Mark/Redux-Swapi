@@ -1,15 +1,20 @@
-import React from "react";
+import React from 'react';
+import { arrayOf, object } from 'prop-types';
 
-import Character from "./Character";
+import Character from './Character';
 
-const CharacterList = props => {
+const CharacterList = ({ characters }) => {
   return (
     <ul>
-      {props.characters.map(character => {
+      {characters.map(character => {
         return <Character key={character.name} character={character} />;
       })}
     </ul>
   );
+};
+
+CharacterList.propTypes = {
+  characters: arrayOf(object).isRequired,
 };
 
 export default CharacterList;
